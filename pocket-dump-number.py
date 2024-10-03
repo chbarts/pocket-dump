@@ -63,7 +63,7 @@ parser.add_argument('-t', '--access-token', metavar='ACCESS_TOKEN', nargs=1,
 parser.add_argument('-n', '--number', metavar='NUMBER', default=5000,
                     type=int, help='Number of saves to retrieve, rounded up to next multiple of 30')
 parser.add_argument('-d', '--date', metavar='ISO_DATE', type=str,
-                    help='Retrieve URLs since date time, in ISO format (like 2024-10-03T10:15:30-06:00')
+                    help='Retrieve URLs since date time, in ISO format (like 2024-10-03T10:15:30-06:00)')
 
 args = parser.parse_args()
 

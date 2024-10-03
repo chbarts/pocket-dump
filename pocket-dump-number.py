@@ -27,7 +27,7 @@ def get_data(key, token, number):
 def dump_data(data):
     print(json.dumps({'list': data}))
 
-parser = argparse.ArgumentParser(description="Get the last 6000 URLs saved to Pocket")
+parser = argparse.ArgumentParser(description="Get the last specified number of (default 5000) URLs saved to Pocket")
 
 parser.add_argument('-k', '--consumer-key', metavar='CONSUMER_KEY', nargs=1,
                     type=str, help='Consumer key')

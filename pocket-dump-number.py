@@ -15,6 +15,8 @@ def get_data(key, token, number):
                           json={'consumer_key': key, 'access_token': token,
                                 'detailType': 'complete', 'offset': off})
         data = r.json()
+        if not ('list' in data):
+            return res
         lst = data['list']
         for k in lst:
             elt = lst[k]
@@ -34,7 +36,7 @@ parser.add_argument('-k', '--consumer-key', metavar='CONSUMER_KEY', nargs=1,
 parser.add_argument('-t', '--access-token', metavar='ACCESS_TOKEN', nargs=1,
                     type=str, help='Access token')
 parser.add_argument('-n', '--number', metavar='NUMBER', default=5000,
-                    type=int, help='Number of saves to retrieve, rounded up to next multiple of 20')
+                    type=int, help='Number of saves to retrieve, rounded up to next multiple of 30')
 
 args = parser.parse_args()
 

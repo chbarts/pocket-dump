@@ -31,7 +31,7 @@ def get_data_since(key, token, date):
     off = 0
     res = {}
     stamp = parse_timestamp(date)
-    while off < number:
+    while True:
         r = requests.post('https://getpocket.com/v3/get',
                           json={'consumer_key': key, 'access_token': token,
                                 'detailType': 'complete', 'offset': off, 'since': stamp})
@@ -77,6 +77,6 @@ if (args.number != 5000) and (not (args.date is None)):
     sys.exit(1)
 
 if not (args.date is None):
-    dump_data(get_data_since(args.consumer_key[0], args.access_token[0], args.date[0]))
+    dump_data(get_data_since(args.consumer_key[0], args.access_token[0], args.date))
 else:
     dump_data(get_data(args.consumer_key[0], args.access_token[0], args.number))

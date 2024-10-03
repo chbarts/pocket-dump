@@ -71,7 +71,7 @@ if (args.consumer_key is None) or (args.access_token is None) or (len(args.consu
     parser.print_help()
     sys.exit(0)
 
-if (not (args.number is None)) and (not (args.date is None)):
+if (args.number != 5000) and (not (args.date is None)):
     print("Can't specify maximum number of results and results since datetime", file=sys.stderr)
     parser.print_help()
     sys.exit(1)

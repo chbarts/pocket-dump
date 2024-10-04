@@ -44,7 +44,6 @@ def get_data_since(key, token, date):
             off = off + 1
             if not elt['item_id'] in res:
                 res[elt['item_id']] = elt
-    return res
 
 
 def dump_data(data):

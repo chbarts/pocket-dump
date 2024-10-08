@@ -70,7 +70,7 @@ parser.add_argument('-d', '--date', metavar='ISO_DATE', type=str,
 
 args = parser.parse_args()
 
-if (args.consumer_key is None) or (args.access_token is None) or (len(args.consumer_key) == 0)  or (len(args.access_token) == 0):
+if (len(args.consumer_key) == 0) or (len(args.access_token) == 0):
     parser.print_help()
     sys.exit(0)
 

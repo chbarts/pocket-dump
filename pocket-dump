@@ -9,6 +9,7 @@ import os
 
 
 def real_get(key, token, off, since=None):
+    headers = {'User-Agent': 'Mozilla/Gorilla'}
     data = {'consumer_key': key, 'access_token': token}
     if since:
         data['since'] = since
@@ -16,6 +17,7 @@ def real_get(key, token, off, since=None):
         data['offset'] = off
     try:
         r = requests.post('https://getpocket.com/v3/get',
+                          headers=headers,
                           json=data)
         return r.json()
     except:

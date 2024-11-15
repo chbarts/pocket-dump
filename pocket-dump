@@ -10,8 +10,7 @@ import os
 
 def real_get(key, token, off, since=None):
     headers = {'User-Agent': 'Mozilla/Gorilla'}
-    data = {'consumer_key': key, 'access_token': token,
-            'detailType': 'complete'}
+    data = {'consumer_key': key, 'access_token': token}
     if since:
         data['since'] = since
     if off != 0:

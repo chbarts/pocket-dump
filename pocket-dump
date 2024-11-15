@@ -8,20 +8,25 @@ import sys
 import os
 
 
+def real_get(key, token, off, since=None):
+    data = {'consumer_key': key, 'access_token': token}
+    if since:
+        data['since'] = since
+    if off != 0:
+        data['offset'] = off
+    try:
+        r = requests.post('https://getpocket.com/v3/get',
+                          json=data)
+        return r.json()
+    except:
+        return None
+
+
 def get_data(key, token, number):
     off = 0
     res = {}
     while off < number:
-        r = None
-        if off == 0:
-            r = requests.post('https://getpocket.com/v3/get',
-                              json={'consumer_key': key, 'access_token': token,
-                                    'detailType': 'complete'})
-        else:
-            r = requests.post('https://getpocket.com/v3/get',
-                              json={'consumer_key': key, 'access_token': token,
-                                    'detailType': 'complete', 'offset': off})
-        data = r.json()
+        data = real_get(key, token, off)
         if not ('list' in data):
             return res
         lst = data['list']
@@ -38,17 +43,7 @@ def get_data_since(key, token, date):
     res = {}
     stamp = parse_timestamp(date)
     while True:
-        r = None
-        if off == 0:
-            r = requests.post('https://getpocket.com/v3/get',
-                              json={'consumer_key': key, 'access_token': token,
-                                    'detailType': 'complete', 'since': stamp})
-        else:
-            r = requests.post('https://getpocket.com/v3/get',
-                              json={'consumer_key': key, 'access_token': token,
-                                    'detailType': 'complete', 'offset': off,
-                                    'since': stamp})
-        data = r.json()
+        data = real_get(key, token, off, since=stamp)
         if not ('list' in data):
             return res
         lst = data['list']

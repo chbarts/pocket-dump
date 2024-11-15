@@ -24,8 +24,7 @@ def real_get(key, token, off, since=None):
         return None
 
 
-def get_data(key, token, number):
-    off = 0
+def get_data(key, token, number, off):
     res = {}
     while off < number:
         data = real_get(key, token, off)
@@ -42,8 +41,7 @@ def get_data(key, token, number):
     return res
 
 
-def get_data_since(key, token, date):
-    off = 0
+def get_data_since(key, token, date, off):
     res = {}
     stamp = parse_timestamp(date)
     while True:
@@ -81,6 +79,8 @@ parser.add_argument('-n', '--number', metavar='NUMBER', default=5000,
                     type=int, help='Number of saves to retrieve, rounded up to next multiple of 30')
 parser.add_argument('-d', '--date', metavar='ISO_DATE', type=str,
                     help='Retrieve URLs since date time, in ISO format (like 2024-10-03T10:15:30-06:00)')
+parser.add_argument('-s', '--start', metavar='START', default=0,
+                    type=int, help='Offset into list of saves to start from, defaults to zero.')
 
 args = parser.parse_args()
 
@@ -94,6 +94,6 @@ if (args.number != 5000) and (not (args.date is None)):
     sys.exit(1)
 
 if not (args.date is None):
-    dump_data(get_data_since(args.consumer_key, args.access_token, args.date))
+    dump_data(get_data_since(args.consumer_key, args.access_token, args.date, args.start))
 else:
-    dump_data(get_data(args.consumer_key, args.access_token, args.number))
+    dump_data(get_data(args.consumer_key, args.access_token, args.number, args.start))

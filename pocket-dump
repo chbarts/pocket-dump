@@ -9,7 +9,7 @@ import os
 
 
 def real_get(key, token, off, since=None):
-    headers = {'User-Agent': 'Mozilla/Gorilla'}
+    headers = {'User-Agent': 'curl/7.81.0'}
     data = {'consumer_key': key, 'access_token': token}
     if since:
         data['since'] = since

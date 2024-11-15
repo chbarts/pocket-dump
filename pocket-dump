@@ -12,9 +12,15 @@ def get_data(key, token, number):
     off = 0
     res = {}
     while off < number:
-        r = requests.post('https://getpocket.com/v3/get',
-                          json={'consumer_key': key, 'access_token': token,
-                                'detailType': 'complete', 'offset': off})
+        r = None
+        if off == 0:
+            r = requests.post('https://getpocket.com/v3/get',
+                              json={'consumer_key': key, 'access_token': token,
+                                    'detailType': 'complete'})
+        else:
+            r = requests.post('https://getpocket.com/v3/get',
+                              json={'consumer_key': key, 'access_token': token,
+                                    'detailType': 'complete', 'offset': off})
         data = r.json()
         if not ('list' in data):
             return res
@@ -32,9 +38,16 @@ def get_data_since(key, token, date):
     res = {}
     stamp = parse_timestamp(date)
     while True:
-        r = requests.post('https://getpocket.com/v3/get',
-                          json={'consumer_key': key, 'access_token': token,
-                                'detailType': 'complete', 'offset': off, 'since': stamp})
+        r = None
+        if off == 0:
+            r = requests.post('https://getpocket.com/v3/get',
+                              json={'consumer_key': key, 'access_token': token,
+                                    'detailType': 'complete', 'since': stamp})
+        else:
+            r = requests.post('https://getpocket.com/v3/get',
+                              json={'consumer_key': key, 'access_token': token,
+                                    'detailType': 'complete', 'offset': off,
+                                    'since': stamp})
         data = r.json()
         if not ('list' in data):
             return res

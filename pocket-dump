@@ -27,6 +27,8 @@ def get_data(key, token, number):
     res = {}
     while off < number:
         data = real_get(key, token, off)
+        if not data:
+            return res
         if not ('list' in data):
             return res
         lst = data['list']
@@ -44,6 +46,8 @@ def get_data_since(key, token, date):
     stamp = parse_timestamp(date)
     while True:
         data = real_get(key, token, off, since=stamp)
+        if not data:
+            return res
         if not ('list' in data):
             return res
         lst = data['list']

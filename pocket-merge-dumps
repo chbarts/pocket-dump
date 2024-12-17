@@ -10,7 +10,8 @@ def add_to_list(tobj, sobj):
     ''' Mutates tobj to have all keys sobj has which tobj initially does not have. sobj is not modified '''
     for key in sobj.keys():
         if not (key in tobj.keys()):
-            tobj[key] = sobj[key]
+            if ('given_url' in sobj[key]):
+                tobj[key] = sobj[key]
 
 def merge_two_objects(obj1, obj2):
     ''' Create a new object (a complete Pocket API response) which is the union of the two input objects, date set to the latter '''
